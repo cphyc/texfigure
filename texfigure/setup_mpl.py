@@ -31,7 +31,7 @@ def figsize(pytex, scale=None, height_ratio=None, figure_width_context="figurewi
         The scale of the figure width in comparison to the textwidth, i.e.
         1 = 100%.
 
-    height_ration : float
+    height_ratio : float
         The ratio of the height to the width.
         Default is the golden ratio. (~0.61), 1.0 would lead to a square
         figure.
@@ -117,7 +117,7 @@ def configure_latex_plots(pytex, font_size=12, **kwargs):
         "font.sans-serif": [],
         "font.monospace": [],
         "axes.labelsize": font_size,  # LaTeX default is 10pt font.
-        "legend.fontsize":font_size,
+        "legend.fontsize": font_size,
         "xtick.labelsize": font_size,
         "ytick.labelsize": font_size,
         "figure.figsize": figsize(pytex),

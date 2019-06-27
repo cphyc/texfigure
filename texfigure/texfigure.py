@@ -168,14 +168,18 @@ class Figure(object):
                                                       base_dir=self.base_dir,
                                                       file_name=self.file_name)
 
-    def get_standard_include(self):
+    def get_standard_include(self, figure_width=None):
         """
         Return the includegraphics command for most other file types.
         """
 
-        return "\includegraphics[width={width}]{{{file_name}}}".format(
-                                                      width=self.figure_width,
-                                                      file_name=self.file_name)
+        if figure_width:
+            return "\includegraphics[width={width}]{{{file_name}}}".format(
+                width=figure_width,
+                file_name=self.file_name)
+        else:
+            return "\includegraphics{{{file_name}}}".format(
+                file_name=self.file_name)
 
     def repr_figure(self):
         """
@@ -205,7 +209,10 @@ class Figure(object):
         return self.subfig_str.format(myfig=myfig, **default_kwargs)
 
     def _repr_latex_(self):
-        return self.repr_figure()
+        return self.get_standard_include()
+
+    def __repr__(self):
+        return self.get_standard_include()
 
 
 class MultiFigure(Sequence):
@@ -360,6 +367,9 @@ class MultiFigure(Sequence):
                 subfigures += fig.repr_subfigure()
 
         return self.fig_str.format(myfig=subfigures, **default_kwargs)
+
+    def __repr__(self):
+        return self._repr_latex_()
 
 
 class Manager(object):
